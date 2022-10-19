@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-repeat: no-repeat;
+        background-position: 400px   100px;
+        /* background-image: url(https://ts1.cn.mm.bing.net/th/id/R-C.346959e179bd395a21a6bbf59c7f4cc0?rik=TIeXPsB13%2fDwzQ&riu=http%3a%2f%2fi04.c.aliimg.com%2fimg%2fibank%2f2014%2f509%2f215%2f1435512905_902973602.jpg&ehk=e4TDpXitkM7BZMpZYL4vy1JIN9lMrYPjdQVr1W9YFdU%3d&risl=&pid=ImgRaw&r=0); */
+    }
+       
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    label {
+        text-align: right;
+        font-family: monospace;
+        font-size: 16px;
+        width: 75px;
+        display: inline-block;
+        color: blue;
+        font-weight: 900;
+    }
+
+    ul li {
+        list-style: none;
+        margin-top: 10px;
+
+    }
+    .log {
+        width: 300px;
+        height: 300px;
+        border: 1px solid skyblue;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -150px;
+        margin-left: -150px;
+        /* position: relative; */
+    }
+
+    input {
+        outline: none;
+    }
+
+    .log  ul  {
+        /* border: 1px solid red; */
+        width: 260px;
+        height: 150px;
+        margin-top: 50px;
+    }
+
+    ul  li {
+        margin-left: 10px;
+        /* border: 1px solid red; */
+    }
+
+    h4 {
+        position: absolute;
+        top: 15px;
+        left: 110px;
+    }
+
+    .btn1 {
+        margin-left: 120px;
+        width: 50px;
+        height: 20px;
+    }
+
+    .btn2{
+        margin-left: 120px;
+        width: 50px;
+        height: 20px;
+    }
+    h4 {
+        position: absolute;
+        top: 15px;
+        left: 110px;
+        color: red;
+    }
+
+
+    </style>
+<body>
+    <div class="log">
+        <h4>注册页面</h4>
+        <ul>
+            <li><label for="">用户名:</label><input type="text" class="uname"></li>
+            <li><label for="">密码:</label><input type="password" class="upwd"></li>
+            <li><label for="">确认密码:</label><input type="password" class="qwd"></li>
+            <li><button class="btn1">注册</button></li>
+            <li><button class="btn2"><a href="log.html">登录</a></button></li>
+        </ul>
+    </div>
+
+    <script>
+        var uname = document.querySelector('.uname')
+        var upwd = document.querySelector('.upwd')
+        var btn1 = document.querySelector('.btn1')
+        var qwd = document.querySelector('.qwd')
+        btn1.addEventListener('click',function(){     
+        if(upwd.value == qwd.value){
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST','http://pg3ddq.natappfree.cc/user/regist')
+        // xhr.open('post','http://pg3ddq.natappfree.cc/user/regist')
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        xhr.send('uname='+uname.value +'&' + 'upwd='+upwd.value)
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){
+                var msg =  JSON.parse(xhr.responseText)
+                // console.log(data.code);
+                // console.log(xhr.responseText);
+                // var msg = JSON.parse(xhr.responseText)
+                // console.log(msg.msg);
+                if(msg.data == '注册成功,请重新登录'){
+                    alert('注册成功，请前往登录页面')
+                }
+        }
+    }
+
+        }   
+        else {
+            alert('两次密码输入不一致')
+        }
+        
+})
+    
+    
+    </script>
+    
+</body>
+</html>
